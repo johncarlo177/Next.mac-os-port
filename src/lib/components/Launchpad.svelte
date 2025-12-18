@@ -6,8 +6,6 @@
   import safari from '$lib/assets/icons/safari.png';
   import projects from '$lib/assets/icons/projects.png';
   import blog from '$lib/assets/icons/blog.png';
-  import github from '$lib/assets/icons/github.png';
-  import clave from '$lib/assets/icons/clave.png';
   
   export let isOpen: boolean;
   const dispatch = createEventDispatcher();
@@ -20,9 +18,7 @@
     { id: 'terminal', name: 'Terminal', icon: terminal },
     { id: 'safari', name: 'Safari', icon: safari },
     { id: 'projects', name: 'Projects', icon: projects },
-    { id: 'blog', name: 'Blog', icon: blog },
-    { id: 'github', name: 'Github', icon: github },
-    {id: 'clave', name:'Clave', icon: clave}
+    { id: 'blog', name: 'Blog', icon: blog }
   ];
 
   $: filteredApps = apps.filter(app => 

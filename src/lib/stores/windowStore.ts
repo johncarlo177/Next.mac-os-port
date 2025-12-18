@@ -4,13 +4,7 @@ import type { wType } from '../types/wType';
 export const windows = writable<wType[]>([]);
 let nextZIndex = 1;
 
-export function addWindow(type: "terminal" | "safari" | "photos" | "blog" | "projects" | "github") {
-
-  if (type === "github") {
-    window.open('https://github.com/ansxuman', '_blank');
-    return;
-  }
-
+export function addWindow(type: "terminal" | "safari" | "photos" | "blog" | "projects") {
   const currentWindows = get(windows);
   const existingWindow = currentWindows.find((w) => w.type === type);
   if (existingWindow) {

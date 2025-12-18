@@ -23,7 +23,7 @@
   }
 
   function handleLaunchApp(event: CustomEvent<string>) {
-    addWindow(event.detail as "terminal" | "safari" | "photos" | "blog" | "projects" | "github");
+    addWindow(event.detail as "terminal" | "safari" | "photos" | "blog" | "projects");
     isLaunchpadOpen = false;
   }
 </script>

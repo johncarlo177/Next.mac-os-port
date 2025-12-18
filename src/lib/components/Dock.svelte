@@ -12,8 +12,6 @@
   import photos from '$lib/assets/icons/photos.avif';
   import blog from '$lib/assets/icons/blog.png';
   import projects from '$lib/assets/icons/projects.png';
-  import github from '$lib/assets/icons/github.png';
-  import clave from '$lib/assets/icons/clave.png';
 
   const dispatch = createEventDispatcher();
   let showPopup = false;
@@ -34,15 +32,11 @@
   });
 
   function handleDockClick(appType: string) {
-    if (!isLargeScreen && appType !== 'github' && appType !== 'clave') {
+    if (!isLargeScreen) {
       showPopup = true;
     } else {
       if (appType === 'launchpad') {
         dispatch('openLaunchpad');
-      } else if (appType === 'github') {
-        window.open('https://github.com/ansxuman', '_blank');
-      } else if (appType === 'clave') {
-        window.open('https://clave.rocks', '_blank');
       } else {
         addWindow(appType as 'terminal' | 'safari' | 'photos' | 'blog' | 'projects');
       }
@@ -104,14 +98,6 @@
     {#if projectsWindow}
       <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
     {/if}
-  </div>
-
-  <div class="dock-item" on:click={() => handleDockClick("github")}>
-    <img src={github} alt="Github" class="h-12 w-12" />
-  </div>
-
-  <div class="dock-item" on:click={() => handleDockClick("clave")}>
-    <img src={clave} alt="Clave" class="h-12 w-12" />
   </div>
 </div>
 
