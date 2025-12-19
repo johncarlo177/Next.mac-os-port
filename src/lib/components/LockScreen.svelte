@@ -9,6 +9,10 @@
   let currentTime = new Date();
   let currentDate = new Date();
 
+  function handleShutDown() {
+    dispatch('shutDown');
+  }
+
   onMount(() => {
     const timer = setInterval(() => {
       currentTime = new Date();
@@ -38,11 +42,12 @@
 </script>
 
 <div 
-  class="fixed inset-0 z-[9998] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center"
+  class="fixed inset-0 z-[9998] flex items-center justify-center"
+  style="background-image: url('/lock-back.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"
   transition:fade={{ duration: 500 }}
 >
-  <!-- Background Image/Blur Effect -->
-  <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-teal-800 opacity-80 blur-3xl"></div>
+  <!-- Background Overlay for better text readability -->
+  <div class="absolute inset-0 bg-black/30"></div>
   
   <!-- Lock Screen Content -->
   <div class="relative z-10 w-full h-full flex flex-col justify-between text-white">
@@ -105,13 +110,14 @@
       <!-- Password Input -->
       <div class="w-80" transition:fade={{ delay: 900 }}>
         <div class="relative flex items-center gap-2">
-          <!-- Back Button -->
+          <!-- Shut Down Button -->
           <button
             class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/70 hover:bg-white/15 hover:text-white transition-all"
-            on:click={() => password = ''}
+            on:click={handleShutDown}
+            title="Shut Down"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z" />
             </svg>
           </button>
 
