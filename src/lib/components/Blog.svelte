@@ -18,9 +18,15 @@
       zipCode: "4103",
       email: "inmc050817@gmail.com",
       phone: "+63 977 318 9377",
-      description: `A highly skilled Python developer and artificial intelligence expert with extensive experience in building scalable solutions for machine learning, deep learning, and automation. 
-
-Passionate about leveraging AI to solve complex problems, I have successfully delivered projects across various domains, including natural language processing, computer vision, and predictive analytics. Proficient in Python frameworks like TensorFlow, PyTorch, and scikit-learn, I specialize in developing end-to-end AI pipelines, including data preprocessing, model training, and deployment on cloud platforms. Also specialize in building scalable and efficient backend systems, utilizing Nodejs, PHP and its frameworks like Express.js and Laravel and integrating databases such as MySQL, MongoDB and PostgreSQL. My hands-on experience includes working with MLOps tools like Docker, Kubernetes, and TensorRT to optimize model performance and deploy AI applications at scale. I stay updated with the latest AI trends, actively participate in tech communities, and contribute to open-source projects. Dedicated to pushing the boundaries of innovation through AI, I aim to empower organizations to harness the full potential of technology.`,
+      description: `Experienced Python and Artificial Intelligence Engineer with a strong background in building scalable machine
+learning, deep learning, and automation solutions. Proven expertise in developing end-to-end AI pipelines,
+including data preprocessing, model training, optimization, and cloud deployment using TensorFlow, PyTorch, and
+scikit-learn. Skilled in designing robust backend systems with Node.js and PHP frameworks such as Express.js and
+Laravel, integrating MySQL, MongoDB, and PostgreSQL databases. Hands-on experience supporting mobile
+applications by building AI-powered APIs, backend services, and scalable infrastructures for cross-platform and
+mobile-first solutions. Adept in MLOps practices using Docker, Kubernetes, and performance optimization tools to
+deploy production-grade AI systems. Passionate about leveraging AI to deliver impactful, scalable, and mobile-
+ready technology solutions.`,
       projectsComplete: 86,
       socialLinks: {
         twitter: "https://x.com/John50401788185",
