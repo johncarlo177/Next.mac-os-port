@@ -16,7 +16,7 @@
   });
 </script>
 
-<div class="h-screen w-screen bg-[#2D3748] overflow-hidden font-sf">
+<div class="h-screen w-screen bg-[#2D3748] overflow-hidden">
   <TopBar on:shutDown on:lockScreen />
   <div class="p-4 flex flex-col items-start">
     <!-- Clock Widget -->
@@ -64,8 +64,4 @@
     animation: gradient 5s ease infinite;
   }
 
-  .font-sf {
-    font-family: -apple-system, BlinkMacSystemFont, "San Francisco",
-      "Helvetica Neue", sans-serif;
-  }
 </style>

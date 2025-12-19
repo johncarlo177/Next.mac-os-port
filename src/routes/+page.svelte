@@ -66,7 +66,7 @@
   }
 </script>
 
-<main class="min-h-screen font-mono relative overflow-hidden">
+<main class="min-h-screen relative overflow-hidden">
   {#if bootState === 'powerOff'}
     <PowerOnScreen on:powerOn={handlePowerOn} />
   {:else if bootState === 'booting'}

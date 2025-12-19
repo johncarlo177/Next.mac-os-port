@@ -51,7 +51,7 @@
 </script>
 
 <!-- Status Bar -->
-<div class="hidden md:flex h-6 bg-black/20 backdrop-blur-md items-center justify-between px-2 text-xs text-white font-sf relative z-50">
+<div class="hidden md:flex h-6 bg-black/20 backdrop-blur-md items-center justify-between px-2 text-xs text-white relative z-50">
   <!-- Left side -->
   <div class="flex items-center space-x-4">
     <div class="relative" bind:this={appleMenuRef}>
@@ -113,7 +113,4 @@
 </div>
 
 <style>
-  .font-sf {
-    font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', sans-serif;
-  }
 </style>

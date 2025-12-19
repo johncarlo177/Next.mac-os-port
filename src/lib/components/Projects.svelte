@@ -37,6 +37,14 @@
     return imageMap[imageName] || '';
   }
 
+  function isMobileApp(project: ProjectData): boolean {
+    // Check if it's a mobile app by icon or technologies
+    return project.icon === 'swift' || 
+           project.technologies.some(tech => 
+             ['iOS', 'SwiftUI', 'UIKit', 'Android', 'React Native', 'Flutter'].includes(tech)
+           );
+  }
+
   async function selectProject(project: ProjectData) {
     selectedProject = project;
     isLoading = true;
@@ -136,13 +144,27 @@
           {:else}
             <div class="p-6">
               {#if selectedProject.image}
-                <div class="mb-6 rounded-lg overflow-hidden shadow-lg">
-                  <img 
-                    src={getImagePath(selectedProject.image)} 
-                    alt={selectedProject.name}
-                    class="w-full h-auto object-cover"
-                  />
-                </div>
+                {#if isMobileApp(selectedProject)}
+                  <!-- Mobile app: 50% width, centered -->
+                  <div class="mb-6 flex justify-center">
+                    <div class="rounded-lg overflow-hidden shadow-lg max-w-md">
+                      <img 
+                        src={getImagePath(selectedProject.image)} 
+                        alt={selectedProject.name}
+                        class="w-[50%] h-auto m-auto object-contain"
+                      />
+                    </div>
+                  </div>
+                {:else}
+                  <!-- Web project: full width -->
+                  <div class="mb-6 rounded-lg overflow-hidden shadow-lg">
+                    <img 
+                      src={getImagePath(selectedProject.image)} 
+                      alt={selectedProject.name}
+                      class="w-full h-auto object-cover"
+                    />
+                  </div>
+                {/if}
               {/if}
               <div class="markdown-body prose prose-sm max-w-none">
                 <SvelteMarkdown source={readmeContent} {renderers} />

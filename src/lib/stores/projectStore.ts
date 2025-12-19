@@ -112,6 +112,28 @@ const initialProjects: ProjectData[] = [
     type: 'application',
     image: 'auto-clipper.png'
   },
+  {
+    id: 'muay-thai-training-combos',
+    name: 'Muay Thai - Training & Combos',
+    icon: 'swift',
+    shortDescription: 'iOS app for Muay Thai practitioners to browse and log a range of combos',
+    githubUrl: 'https://apps.apple.com/gb/app/muay-thai-training-combos/id1606507775',
+    readmeUrl: 'data:text/plain,Muay Thai - Training & Combos\n\nAn iOS app for Muay Thai practitioners to browse and log a range of combos. The app is built using the latest SwiftUI APIs and persists data using Core Data. Features include combo tracking, calorie counter, training timer, instructional videos, and HealthKit integration.',
+    technologies: ['SwiftUI', 'Core Data', 'HealthKit', 'WidgetKit', 'iOS'],
+    type: 'application',
+    image: 'muay-thai-app.png'
+  },
+  {
+    id: 'earth-hero-climate-change',
+    name: 'Earth Hero: Climate Change',
+    icon: 'swift',
+    shortDescription: 'iOS app to combat climate change, developed using UIKit and Firebase',
+    githubUrl: 'https://apps.apple.com/us/app/earth-hero-climate-change/id1458057746',
+    readmeUrl: 'data:text/plain,Earth Hero: Climate Change\n\nAn iOS app to combat climate change, developed using UIKit and Firebase. Explore personalized, eco-friendly actions that contribute to the well-being of planet Earth and communities—allowing users to shape their future and track their activities. Features include carbon footprint tracking, personalized climate actions, community engagement, and goal setting.',
+    technologies: ['UIKit', 'AutoLayout', 'Firebase', 'Coordinator Pattern', 'iOS'],
+    type: 'application',
+    image: 'earth-hero-app.png'
+  },
 ];
 
 export const projects = writable<ProjectData[]>(initialProjects);

@@ -37,7 +37,7 @@
 
 {#if isOpen}
   <div 
-    class="fixed inset-0 z-50 bg-black/30 backdrop-blur-2xl font-sf"
+    class="fixed inset-0 z-50 bg-black/30 backdrop-blur-2xl"
     transition:fade={{ duration: 200 }}
     on:click={() => dispatch('closeLaunchpad')}
   >
@@ -101,7 +101,4 @@
 
 
 <style>
-  .font-sf {
-    font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', sans-serif;
-  }
 </style>

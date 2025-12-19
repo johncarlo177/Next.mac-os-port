@@ -229,6 +229,20 @@
       ></defs
     ></svg
   >
+{:else if iconName === "swift"}
+  <!-- Swift icon -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="100%"
+    height="100%"
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <path
+      d="M17.5 2.5c-2.5 0-4.5 1.5-5.5 3.5-1-2-3-3.5-5.5-3.5-3 0-5 2.5-5 6 0 5 4.5 9 9.5 14 1 1 2 1 3 0 5-5 9.5-9 9.5-14 0-3.5-2-6-5-6z"
+      fill="#FA7343"
+    />
+  </svg>
 {:else}
   <!-- Default fallback icon -->
   <svg
