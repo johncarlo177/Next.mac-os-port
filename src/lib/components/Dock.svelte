@@ -2,9 +2,9 @@
   import { createEventDispatcher,onMount } from 'svelte';
   import { windows } from '../stores/windowStore';
 
-  export let isAppRunning: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => boolean;
-  export let isAppMinimized: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => boolean;
-  export let addWindow: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects') => void;
+  export let isAppRunning: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume') => boolean;
+  export let isAppMinimized: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume') => boolean;
+  export let addWindow: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume') => void;
 
   import launchpad from '$lib/assets/icons/launchpad.png';
   import terminal from '$lib/assets/icons/terminal.avif';
@@ -38,7 +38,7 @@
       if (appType === 'launchpad') {
         dispatch('openLaunchpad');
       } else {
-        addWindow(appType as 'terminal' | 'safari' | 'photos' | 'blog' | 'projects');
+        addWindow(appType as 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume');
       }
     }
   }
@@ -52,6 +52,8 @@
   $: photosWindow = $windows.find(w => w.type === 'photos');
   $: blogWindow = $windows.find(w => w.type === 'blog');
   $: projectsWindow = $windows.find(w => w.type === 'projects');
+  $: experienceWindow = $windows.find(w => w.type === 'experience');
+  $: resumeWindow = $windows.find(w => w.type === 'resume');
   $: isLargeScreen = windowWidth >= 1024;
 
 </script>
@@ -96,6 +98,28 @@
   <div class="dock-item" on:click={() => handleDockClick("projects")}>
     <img src={projects} alt="Projects" class="h-12 w-12" />
     {#if projectsWindow}
+      <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
+    {/if}
+  </div>
+
+  <div class="dock-item" on:click={() => handleDockClick("experience")}>
+    <div class="h-12 w-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    </div>
+    {#if experienceWindow}
+      <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
+    {/if}
+  </div>
+
+  <div class="dock-item" on:click={() => handleDockClick("resume")}>
+    <div class="h-12 w-12 rounded-lg bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center">
+      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    </div>
+    {#if resumeWindow}
       <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
     {/if}
   </div>

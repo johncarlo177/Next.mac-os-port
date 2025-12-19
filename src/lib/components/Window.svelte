@@ -6,6 +6,8 @@
     import Photos from "./Photos.svelte";
     import Projects from "./Projects.svelte";
     import Blog from "./Blog.svelte";
+    import Experience from "./Experience.svelte";
+    import Resume from "./Resume.svelte";
   
     export let window: wType;
   
@@ -54,6 +56,10 @@
   <Projects {window} {startDrag} />
 {:else if window.type === "blog"}
   <Blog {window} {startDrag} />
+{:else if window.type === "experience"}
+  <Experience {window} {startDrag} />
+{:else if window.type === "resume"}
+  <Resume {window} {startDrag} />
 {/if}
     
     {#if !window.maximized}

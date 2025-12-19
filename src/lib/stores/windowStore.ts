@@ -4,7 +4,7 @@ import type { wType } from '../types/wType';
 export const windows = writable<wType[]>([]);
 let nextZIndex = 1;
 
-export function addWindow(type: "terminal" | "safari" | "photos" | "blog" | "projects") {
+export function addWindow(type: "terminal" | "safari" | "photos" | "blog" | "projects" | "experience" | "resume") {
   const currentWindows = get(windows);
   const existingWindow = currentWindows.find((w) => w.type === type);
   if (existingWindow) {
@@ -86,12 +86,12 @@ export function toggleMaximize(id: string) {
   );
 }
 
-export function isAppRunning(type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects'): boolean {
+export function isAppRunning(type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume'): boolean {
   const currentWindows = get(windows);
   return currentWindows.some(w => w.type === type && !w.minimized);
 }
 
-export function isAppMinimized(type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects'): boolean {
+export function isAppMinimized(type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume'): boolean {
   const currentWindows = get(windows);
   return currentWindows.some(w => w.type === type && w.minimized);
 }

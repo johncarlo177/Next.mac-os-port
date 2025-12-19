@@ -18,7 +18,9 @@
     { id: 'terminal', name: 'Terminal', icon: terminal },
     { id: 'safari', name: 'Safari', icon: safari },
     { id: 'projects', name: 'Projects', icon: projects },
-    { id: 'blog', name: 'Blog', icon: blog }
+    { id: 'blog', name: 'Blog', icon: blog },
+    { id: 'experience', name: 'Work Experience', icon: null, isCustom: true, iconColor: 'from-blue-500 to-purple-600' },
+    { id: 'resume', name: 'Resume', icon: null, isCustom: true, iconColor: 'from-red-500 to-pink-600' }
   ];
 
   $: filteredApps = apps.filter(app => 
@@ -64,7 +66,21 @@
               in:scale={{duration: 200, delay: 100}}
               out:scale={{duration: 200}}
             >
-              <img src={app.icon} alt={app.name} class="w-20 h-20 mb-2 object-contain" />
+              {#if app.isCustom}
+                <div class="w-20 h-20 rounded-lg bg-gradient-to-br {app.iconColor || 'from-blue-500 to-purple-600'} flex items-center justify-center mb-2">
+                  {#if app.id === 'experience'}
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  {:else if app.id === 'resume'}
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  {/if}
+                </div>
+              {:else}
+                <img src={app.icon} alt={app.name} class="w-20 h-20 mb-2 object-contain" />
+              {/if}
               <span class="text-white text-sm text-center font-light">{app.name}</span>
             </div>
           {/each}
