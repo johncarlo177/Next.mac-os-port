@@ -64,13 +64,14 @@ export function toggleMaximize(id: string) {
       if (w.id === id) {
         if (!w.maximized) {
           // Save original size and position before maximizing
+          const topBarHeight = 24; // TopBar height is h-6 (24px)
           return {
             ...w,
             maximized: true,
             originalSize: { width: w.size.width, height: w.size.height },
             originalPosition: { x: w.position.x, y: w.position.y },
-            position: { x: 0, y: 0 },
-            size: { width: window.innerWidth, height: window.innerHeight },
+            position: { x: 0, y: topBarHeight },
+            size: { width: window.innerWidth, height: window.innerHeight - topBarHeight },
           };
         } else {
           // Restore original size and position

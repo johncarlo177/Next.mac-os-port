@@ -42,7 +42,9 @@
   
   <div
     id={window.id}
-    class="absolute rounded-lg shadow-2xl overflow-hidden"
+    class="absolute shadow-2xl overflow-hidden"
+    class:rounded-lg={!window.maximized}
+    class:rounded-none={window.maximized}
     style="left: {window.position.x}px; top: {window.position.y}px; width: {window.size.width}px; height: {window.size.height}px; z-index: {window.zIndex};"
     class:hidden={window.minimized}
     on:mousedown={() => focusWindow(window.id)}
