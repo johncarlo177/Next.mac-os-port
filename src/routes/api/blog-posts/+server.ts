@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { DEV_TO_API_KEY } from '$env/static/private';
+// import { DEV_TO_API_KEY } from '$env/static/private';
 
 
 
@@ -10,7 +10,7 @@ export const GET: RequestHandler = async () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'api-key': DEV_TO_API_KEY,
+        // 'api-key': DEV_TO_API_KEY,
         'Accept': 'application/vnd.forem.api-v1+json',
         'User-Agent': 'macOS-Themed-Portfolio',
       },
