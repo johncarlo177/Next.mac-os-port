@@ -1,6 +1,7 @@
 <script lang="ts">
   import { closeWindow, toggleMinimize, toggleMaximize } from "../stores/windowStore";
   import type { wType } from "../types/wType";
+  import { browser } from '$app/environment';
 
   export let startDrag: (e: MouseEvent, id: string, action: 'move' | 'resize') => void;
   export let window: wType;
@@ -11,6 +12,9 @@
   let selectedService = '';
   let selectedBudget = '';
   let message = '';
+  let isSubmitting = false;
+  let submitMessage = '';
+  let submitMessageType: 'success' | 'error' | '' = '';
 
   const services = [
     'Web Design',
@@ -37,31 +41,59 @@
                    selectedBudget !== '' && 
                    message.trim() !== '';
 
-  function handleSubmit() {
-    if (!isFormValid) {
+  async function handleSubmit() {
+    if (!isFormValid || isSubmitting) {
       return;
     }
     
-    // Here you would typically send the form data to a backend
-    const formData = {
-      firstName,
-      lastName,
-      email,
-      service: selectedService,
-      budget: selectedBudget,
-      message
-    };
+    isSubmitting = true;
+    submitMessage = '';
+    submitMessageType = '';
     
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! I will get back to you soon.');
-    
-    // Reset form
-    firstName = '';
-    lastName = '';
-    email = '';
-    selectedService = '';
-    selectedBudget = '';
-    message = '';
+    try {
+      const formData = {
+        firstName,
+        lastName,
+        email,
+        service: selectedService,
+        budget: selectedBudget,
+        message
+      };
+      
+      // Try using the API route first
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok && result.success) {
+        submitMessage = result.message || 'Thank you for your message! I will get back to you soon.';
+        submitMessageType = 'success';
+        
+        // Reset form
+        firstName = '';
+        lastName = '';
+        email = '';
+        selectedService = '';
+        selectedBudget = '';
+        message = '';
+      } else {
+        // Show error message
+        submitMessage = result.error || 'Failed to send message. Please try again later.';
+        submitMessageType = 'error';
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      submitMessage = 'An error occurred. Please try again later or email me directly at inmc050817@gmail.com';
+      submitMessageType = 'error';
+    } finally {
+      isSubmitting = false;
+    }
   }
 </script>
 
@@ -184,13 +216,20 @@
             ></textarea>
           </div>
 
+          <!-- Submit Message -->
+          {#if submitMessage}
+            <div class="p-4 rounded-lg {submitMessageType === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}">
+              {submitMessage}
+            </div>
+          {/if}
+
           <!-- Submit Button -->
           <button
             type="submit"
-            disabled={!isFormValid}
-            class="w-full px-6 py-3 font-semibold rounded-lg transition-colors duration-200 {isFormValid ? 'bg-gray-700 text-white hover:bg-gray-800 cursor-pointer' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}"
+            disabled={!isFormValid || isSubmitting}
+            class="w-full px-6 py-3 font-semibold rounded-lg transition-colors duration-200 {isFormValid && !isSubmitting ? 'bg-gray-700 text-white hover:bg-gray-800 cursor-pointer' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}"
           >
-            Submit
+            {isSubmitting ? 'Sending...' : 'Submit'}
           </button>
         </form>
       </div>

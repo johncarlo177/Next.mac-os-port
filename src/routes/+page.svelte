@@ -15,7 +15,7 @@
 
   onMount(() => {
     if (browser) {
-      document.title = "Home | John Carlo";
+      document.title = "John Carlo | Portfolio";
       // Check if already unlocked in this session
       const unlocked = sessionStorage.getItem('macos_unlocked');
       if (unlocked === 'true') {
