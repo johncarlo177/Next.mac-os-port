@@ -5,18 +5,40 @@
   import Dock from "../lib/components/Dock.svelte";
   import Window from "../lib/components/Window.svelte";
   import Launchpad from "../lib/components/Launchpad.svelte";
+  import BootScreen from "../lib/components/BootScreen.svelte";
+  import LockScreen from "../lib/components/LockScreen.svelte";
   import { windows, addWindow, isAppRunning, isAppMinimized } from "../lib/stores/windowStore";
 
   let isLaunchpadOpen = false;
+  let bootState: 'booting' | 'locked' | 'unlocked' = 'booting';
 
   onMount(() => {
     if (browser) {
       document.title = "Home | John Carlo";
+      // Check if already unlocked in this session
+      const unlocked = sessionStorage.getItem('macos_unlocked');
+      if (unlocked === 'true') {
+        bootState = 'unlocked';
+        if (window.innerWidth >= 768) {
+          addWindow("terminal");
+        }
+      }
+    }
+  });
+
+  function handleBootComplete() {
+    bootState = 'locked';
+  }
+
+  function handleUnlock() {
+    bootState = 'unlocked';
+    if (browser) {
+      sessionStorage.setItem('macos_unlocked', 'true');
       if (window.innerWidth >= 768) {
         addWindow("terminal");
       }
     }
-  });
+  }
 
   function handleOpenLaunchpad() {
     isLaunchpadOpen = true;
@@ -29,17 +51,23 @@
 </script>
 
 <main class="min-h-screen font-mono relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-teal-800 opacity-80"></div>
-  
-  <Desktop />
-  
-  {#each $windows as window (window.id)}
-    <Window {window} />
-  {/each}
-  
-  <Dock {isAppRunning} {isAppMinimized} {addWindow} on:openLaunchpad={handleOpenLaunchpad} />
-  
-  <Launchpad isOpen={isLaunchpadOpen} on:launchApp={handleLaunchApp} on:closeLaunchpad={() => isLaunchpadOpen = false} />
+  {#if bootState === 'booting'}
+    <BootScreen on:bootComplete={handleBootComplete} />
+  {:else if bootState === 'locked'}
+    <LockScreen on:unlock={handleUnlock} />
+  {:else}
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-teal-800 opacity-80"></div>
+    
+    <Desktop />
+    
+    {#each $windows as window (window.id)}
+      <Window {window} />
+    {/each}
+    
+    <Dock {isAppRunning} {isAppMinimized} {addWindow} on:openLaunchpad={handleOpenLaunchpad} />
+    
+    <Launchpad isOpen={isLaunchpadOpen} on:launchApp={handleLaunchApp} on:closeLaunchpad={() => isLaunchpadOpen = false} />
+  {/if}
 </main>
 
 <style>
