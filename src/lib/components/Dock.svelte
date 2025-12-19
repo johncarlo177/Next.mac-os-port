@@ -89,7 +89,7 @@
 
   {#if isLargeScreen}
   <div class="dock-item" on:click={() => handleDockClick("blog")}>
-    <img src={blog} alt="Blog" class="h-12 w-12" />
+    <img src={blog} alt="About Me" class="h-12 w-12" />
     {#if blogWindow}
       <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
     {/if}

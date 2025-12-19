@@ -212,7 +212,7 @@
 
         <!-- Discord -->
         <a 
-          href="https://discord.com/users/your-discord-id" 
+          href="https://discord.gg/396DsMtM" 
           target="_blank" 
           rel="noopener noreferrer" 
           class="w-10 h-10 rounded-full bg-gray-500 hover:bg-gray-600 flex items-center justify-center transition-colors duration-200 group"
@@ -238,7 +238,7 @@
 
         <!-- LinkedIn -->
         <a 
-          href="https://www.linkedin.com/in/your-profile" 
+          href="https://www.linkedin.com" 
           target="_blank" 
           rel="noopener noreferrer" 
           class="w-10 h-10 rounded-full bg-gray-500 hover:bg-gray-600 flex items-center justify-center transition-colors duration-200 group"
@@ -251,7 +251,7 @@
 
         <!-- Twitter/X -->
         <a 
-          href="https://x.com/John50401788185" 
+          href="https://x.com/Johncarlocos" 
           target="_blank" 
           rel="noopener noreferrer" 
           class="w-10 h-10 rounded-full bg-gray-500 hover:bg-gray-600 flex items-center justify-center transition-colors duration-200 group"
@@ -264,7 +264,7 @@
 
         <!-- Facebook -->
         <a 
-          href="https://www.facebook.com/profile.php?id=61580879649700" 
+          href="https://www.facebook.com/profile.php?id=61583826572375" 
           target="_blank" 
           rel="noopener noreferrer" 
           class="w-10 h-10 rounded-full bg-gray-500 hover:bg-gray-600 flex items-center justify-center transition-colors duration-200 group"

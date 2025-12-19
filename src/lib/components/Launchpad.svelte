@@ -18,7 +18,7 @@
     { id: 'terminal', name: 'Terminal', icon: terminal },
     { id: 'safari', name: 'Safari', icon: safari },
     { id: 'projects', name: 'Projects', icon: projects },
-    { id: 'blog', name: 'Blog', icon: blog },
+    { id: 'blog', name: 'About Me', icon: blog },
     { id: 'experience', name: 'Work Experience', icon: null, isCustom: true, iconColor: 'from-blue-500 to-purple-600' },
     { id: 'resume', name: 'Resume', icon: null, isCustom: true, iconColor: 'from-red-500 to-pink-600' },
     { id: 'contact', name: 'Contact', icon: null, isCustom: true, iconColor: 'from-indigo-500 to-blue-600' }

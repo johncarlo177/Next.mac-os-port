@@ -11,7 +11,7 @@
 
   onMount(() => {
     if (browser) {
-      document.title = "Home | Ansxuman";
+      document.title = "Home | John Carlo";
       if (window.innerWidth >= 768) {
         addWindow("terminal");
       }

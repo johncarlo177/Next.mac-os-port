@@ -91,7 +91,7 @@ Passionate about leveraging AI to solve complex problems, I have successfully de
 </script>
   
 <div class="bg-white h-full rounded-lg flex flex-col overflow-hidden font-sans">
-  <!-- Blog Header -->
+  <!-- About Me Header -->
   <div class="bg-gray-100 px-2 py-2 flex items-center cursor-move border-b border-gray-200" on:mousedown={(e) => startDrag(e, window.id, "move")}>
     <div class="flex space-x-2 mr-4">
       <button class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 focus:outline-none" on:click={() => closeWindow(window.id)}>
