@@ -2,9 +2,9 @@
   import { createEventDispatcher,onMount } from 'svelte';
   import { windows } from '../stores/windowStore';
 
-  export let isAppRunning: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume') => boolean;
-  export let isAppMinimized: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume') => boolean;
-  export let addWindow: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume') => void;
+  export let isAppRunning: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume' | 'contact') => boolean;
+  export let isAppMinimized: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume' | 'contact') => boolean;
+  export let addWindow: (type: 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume' | 'contact') => void;
 
   import launchpad from '$lib/assets/icons/launchpad.png';
   import terminal from '$lib/assets/icons/terminal.avif';
@@ -38,7 +38,7 @@
       if (appType === 'launchpad') {
         dispatch('openLaunchpad');
       } else {
-        addWindow(appType as 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume');
+        addWindow(appType as 'terminal' | 'safari' | 'photos' | 'blog' | 'projects' | 'experience' | 'resume' | 'contact');
       }
     }
   }
@@ -54,6 +54,7 @@
   $: projectsWindow = $windows.find(w => w.type === 'projects');
   $: experienceWindow = $windows.find(w => w.type === 'experience');
   $: resumeWindow = $windows.find(w => w.type === 'resume');
+  $: contactWindow = $windows.find(w => w.type === 'contact');
   $: isLargeScreen = windowWidth >= 1024;
 
 </script>
@@ -120,6 +121,17 @@
       </svg>
     </div>
     {#if resumeWindow}
+      <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
+    {/if}
+  </div>
+
+  <div class="dock-item" on:click={() => handleDockClick("contact")}>
+    <div class="h-12 w-12 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center">
+      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    </div>
+    {#if contactWindow}
       <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"></div>
     {/if}
   </div>

@@ -8,6 +8,7 @@
     import Blog from "./Blog.svelte";
     import Experience from "./Experience.svelte";
     import Resume from "./Resume.svelte";
+    import Contact from "./Contact.svelte";
   
     export let window: wType;
   
@@ -60,6 +61,8 @@
   <Experience {window} {startDrag} />
 {:else if window.type === "resume"}
   <Resume {window} {startDrag} />
+{:else if window.type === "contact"}
+  <Contact {window} {startDrag} />
 {/if}
     
     {#if !window.maximized}

@@ -20,7 +20,8 @@
     { id: 'projects', name: 'Projects', icon: projects },
     { id: 'blog', name: 'Blog', icon: blog },
     { id: 'experience', name: 'Work Experience', icon: null, isCustom: true, iconColor: 'from-blue-500 to-purple-600' },
-    { id: 'resume', name: 'Resume', icon: null, isCustom: true, iconColor: 'from-red-500 to-pink-600' }
+    { id: 'resume', name: 'Resume', icon: null, isCustom: true, iconColor: 'from-red-500 to-pink-600' },
+    { id: 'contact', name: 'Contact', icon: null, isCustom: true, iconColor: 'from-indigo-500 to-blue-600' }
   ];
 
   $: filteredApps = apps.filter(app => 
@@ -75,6 +76,10 @@
                   {:else if app.id === 'resume'}
                     <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  {:else if app.id === 'contact'}
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   {/if}
                 </div>
