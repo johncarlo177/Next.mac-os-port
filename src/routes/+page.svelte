@@ -5,12 +5,13 @@
   import Dock from "../lib/components/Dock.svelte";
   import Window from "../lib/components/Window.svelte";
   import Launchpad from "../lib/components/Launchpad.svelte";
+  import PowerOnScreen from "../lib/components/PowerOnScreen.svelte";
   import BootScreen from "../lib/components/BootScreen.svelte";
   import LockScreen from "../lib/components/LockScreen.svelte";
   import { windows, addWindow, isAppRunning, isAppMinimized } from "../lib/stores/windowStore";
 
   let isLaunchpadOpen = false;
-  let bootState: 'booting' | 'locked' | 'unlocked' = 'booting';
+  let bootState: 'powerOff' | 'booting' | 'locked' | 'unlocked' = 'powerOff';
 
   onMount(() => {
     if (browser) {
@@ -26,6 +27,10 @@
     }
   });
 
+  function handlePowerOn() {
+    bootState = 'booting';
+  }
+
   function handleBootComplete() {
     bootState = 'locked';
   }
@@ -40,6 +45,17 @@
     }
   }
 
+  function handleShutDown() {
+    bootState = 'powerOff';
+    if (browser) {
+      sessionStorage.removeItem('macos_unlocked');
+    }
+  }
+
+  function handleLockScreen() {
+    bootState = 'locked';
+  }
+
   function handleOpenLaunchpad() {
     isLaunchpadOpen = true;
   }
@@ -51,14 +67,16 @@
 </script>
 
 <main class="min-h-screen font-mono relative overflow-hidden">
-  {#if bootState === 'booting'}
+  {#if bootState === 'powerOff'}
+    <PowerOnScreen on:powerOn={handlePowerOn} />
+  {:else if bootState === 'booting'}
     <BootScreen on:bootComplete={handleBootComplete} />
   {:else if bootState === 'locked'}
     <LockScreen on:unlock={handleUnlock} />
   {:else}
     <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-teal-800 opacity-80"></div>
     
-    <Desktop />
+    <Desktop on:shutDown={handleShutDown} on:lockScreen={handleLockScreen} />
     
     {#each $windows as window (window.id)}
       <Window {window} />
