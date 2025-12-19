@@ -63,21 +63,27 @@ export function toggleMaximize(id: string) {
     currentWindows.map((w) => {
       if (w.id === id) {
         if (!w.maximized) {
+          // Save original size and position before maximizing
           return {
             ...w,
             maximized: true,
+            originalSize: { width: w.size.width, height: w.size.height },
+            originalPosition: { x: w.position.x, y: w.position.y },
             position: { x: 0, y: 0 },
             size: { width: window.innerWidth, height: window.innerHeight },
           };
         } else {
+          // Restore original size and position
           return {
             ...w,
             maximized: false,
-            position: {
-              x: (window.innerWidth - 600) / 2,
-              y: (window.innerHeight - 400) / 2,
+            position: w.originalPosition || {
+              x: (window.innerWidth - (w.originalSize?.width || 900)) / 2,
+              y: (window.innerHeight - (w.originalSize?.height || 600)) / 2,
             },
-            size: { width: 600, height: 400 },
+            size: w.originalSize || { width: 900, height: 600 },
+            originalSize: undefined,
+            originalPosition: undefined,
           };
         }
       }

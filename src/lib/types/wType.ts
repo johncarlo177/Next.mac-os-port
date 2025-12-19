@@ -5,5 +5,7 @@ export interface wType {
     maximized: boolean;
     position: { x: number; y: number };
     size: { width: number; height: number };
+    originalSize?: { width: number; height: number };
+    originalPosition?: { x: number; y: number };
     zIndex: number;
   }
