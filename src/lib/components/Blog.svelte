@@ -1,39 +1,28 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import type { BlogPost } from '../types/blogType';
-    import { blogPosts, fetchBlogPosts } from '../stores/blogStore';
     import { closeWindow, toggleMinimize, toggleMaximize } from "../stores/windowStore";
     import type { wType } from "../types/wType";
-    import SvelteMarkdown from 'svelte-markdown';
-    import 'github-markdown-css/github-markdown-light.css';
   
     export let startDrag: (e: MouseEvent, id: string, action: 'move' | 'resize') => void;
     export let window: wType;
-  
-    let selectedPost: BlogPost | null = null;
-    let isLoading: boolean = true;
-  
-    onMount(async () => {
-      isLoading = true;
-      await fetchBlogPosts();
-      isLoading = false;
-    });
-  
-    function selectPost(post: BlogPost) {
-      selectedPost = post;
-    }
-  
-    function openPostLink(url: string) {
-      if (typeof globalThis !== 'undefined') {
-        globalThis.window.open(url, '_blank');
+
+    const aboutMe = {
+      name: "John Carlo Alicdan Cosme",
+      title: "Python/AI Developer",
+      dateOfBirth: "January 07, 1990",
+      address: "Medicion 2C Imus Cavite, Philippines",
+      zipCode: "4103",
+      email: "inmc050817@gmail.com",
+      phone: "+63 977 318 9377",
+      description: `A highly skilled Python developer and artificial intelligence expert with extensive experience in building scalable solutions for machine learning, deep learning, and automation. 
+
+Passionate about leveraging AI to solve complex problems, I have successfully delivered projects across various domains, including natural language processing, computer vision, and predictive analytics. Proficient in Python frameworks like TensorFlow, PyTorch, and scikit-learn, I specialize in developing end-to-end AI pipelines, including data preprocessing, model training, and deployment on cloud platforms. Also specialize in building scalable and efficient backend systems, utilizing Nodejs, PHP and its frameworks like Express.js and Laravel and integrating databases such as MySQL, MongoDB and PostgreSQL. My hands-on experience includes working with MLOps tools like Docker, Kubernetes, and TensorRT to optimize model performance and deploy AI applications at scale. I stay updated with the latest AI trends, actively participate in tech communities, and contribute to open-source projects. Dedicated to pushing the boundaries of innovation through AI, I aim to empower organizations to harness the full potential of technology.`,
+      projectsComplete: 86,
+      socialLinks: {
+        twitter: "https://x.com/John50401788185",
+        facebook: "https://www.facebook.com/profile.php?id=61580879649700",
+        telegram: "https://t.me/johncarlo2741"
       }
-    }
-  
-    function getRandomColor() {
-      const colors = ['bg-red-200 text-red-800', 'bg-blue-200 text-blue-800', 'bg-green-200 text-green-800', 
-                      'bg-yellow-200 text-yellow-800', 'bg-purple-200 text-purple-800', 'bg-pink-200 text-pink-800'];
-      return colors[Math.floor(Math.random() * colors.length)];
-    }
+    };
 </script>
   
 <div class="bg-white h-full rounded-lg flex flex-col overflow-hidden font-sans">
@@ -56,114 +45,48 @@
         </svg>
       </button>
     </div>
-    <div class="flex-grow text-center font-semibold">Blog Posts</div>
+    <div class="flex-grow text-center font-semibold">About Me</div>
     <div class="flex space-x-2">
-      <a href="https://medium.com/@ansxuman" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-800">
+      <a href={aboutMe.socialLinks.twitter} target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-500 transition-colors">
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
         </svg>
       </a>
-      <a href="https://dev.to/ansxuman" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-800">
+      <a href={aboutMe.socialLinks.facebook} target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 transition-colors">
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M7.42 10.05c-.18-.16-.46-.23-.84-.23H6l.02 2.44.04 2.45.56-.02c.41 0 .63-.07.83-.26.24-.24.26-.36.26-2.2 0-1.91-.02-1.96-.29-2.18zM0 4.94v14.12h24V4.94H0zM8.56 15.3c-.44.58-1.06.77-2.53.77H4.71V8.53h1.4c1.67 0 2.16.18 2.6.9.27.43.29.6.32 2.57.05 2.23-.02 2.73-.47 3.3zm5.09-5.47h-2.47v1.77h1.52v1.28l-.72.04-.75.03v1.77l1.22.03 1.2.04v1.28h-1.6c-1.53 0-1.6-.01-1.87-.3l-.3-.28v-3.16c0-3.02.01-3.18.25-3.48.23-.31.25-.31 1.88-.31h1.64v1.3zm4.68 5.45c-.17.43-.64.79-1 .79-.18 0-.45-.15-.67-.39-.32-.32-.45-.63-.82-2.08l-.9-3.39-.45-1.67h.76c.4 0 .75.02.75.05 0 .06 1.16 4.54 1.26 4.83.04.15.32-.7.73-2.3l.66-2.52.74-.04c.4-.02.73 0 .73.04 0 .14-1.67 6.38-1.8 6.68z"/>
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
         </svg>
       </a>
-      <a href="https://hashnode.com/@ansxuman" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-800">
+      <a href={aboutMe.socialLinks.telegram} target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-400 transition-colors">
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M22.351 8.019l-6.37-6.37a5.63 5.63 0 0 0-7.962 0l-6.37 6.37a5.63 5.63 0 0 0 0 7.962l6.37 6.37a5.63 5.63 0 0 0 7.962 0l6.37-6.37a5.63 5.63 0 0 0 0-7.962zM12 15.953a3.953 3.953 0 1 1 0-7.906 3.953 3.953 0 0 1 0 7.906z"/>
+          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15.056-.213.06-.094.134-.16.237-.16.112 0 .32.04.444.28.06.12.2.42.258.576.06.18.12.27.18.27.06 0 .18-.09.3-.27.12-.18.24-.36.3-.45.06-.09.12-.15.18-.15.06 0 .12.03.18.15.06.12.06.21 0 .27-.06.06-.12.12-.18.21z"/>
         </svg>
       </a>
     </div>
   </div>
   
   <div class="flex-grow flex overflow-hidden">
-    <div class="w-80 border-r border-gray-200 overflow-y-auto bg-gray-50">
-      {#if isLoading}
-        <div class="flex justify-center items-center h-full">
-          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+    <div class="flex-1 overflow-y-auto bg-white p-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+          <h1 class="text-4xl font-bold text-gray-900 mb-2">{aboutMe.name}</h1>
+          <h2 class="text-2xl text-gray-600 mb-6">{aboutMe.title}</h2>
         </div>
-      {:else}
-        {#each $blogPosts as post, index}
-          <div 
-            class="p-4 hover:bg-gray-100 cursor-pointer transition-colors duration-200 {selectedPost === post ? 'bg-blue-100 border-l-2 border-blue-500' : ''}"
-            on:click={() => selectPost(post)}
-          >
-            <div class="flex justify-between items-center mb-2">
-              <h3 class="font-semibold text-gray-800 truncate">{post.title}</h3>
-              <button 
-                class="text-gray-500 hover:text-gray-700 transition-colors duration-200"
-                on:click|stopPropagation={() => openPostLink(post.url)}
-              >
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                  <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                </svg>
-              </button>
-            </div>
-            <p class="text-sm text-gray-600 mb-2 line-clamp-2">{post.description}</p>
-            <div class="flex justify-between items-center text-xs text-gray-500">
-              <span>{new Date(post.published_at).toLocaleDateString()}</span>
-              <div class="flex items-center gap-3">
-                <span class="flex items-center gap-1">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {post.reading_time_minutes}m
-                </span>
-                <span class="flex items-center gap-1">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                  {post.page_views_count.toLocaleString()}
-                </span>
-              </div>
-            </div>
-            <div class="flex flex-wrap gap-1 mt-2">
-              {#each post.tag_list as tag}
-                <span class="px-2 py-1 text-xs font-medium rounded-full {getRandomColor()}">{tag}</span>
-              {/each}
-            </div>
-          </div>
-          {#if index < $blogPosts.length - 1}
-            <hr class="border-gray-300" />
-          {/if}
-        {/each}
-      {/if}
-    </div>
-  
-    <div class="flex-1 overflow-hidden flex flex-col bg-white">
-      {#if selectedPost}
-        <div class="overflow-y-auto flex-grow p-6">
-          <h1 class="text-2xl font-bold mb-4">{selectedPost.title}</h1>
-          {#if selectedPost.cover_image}
-            <img src={selectedPost.cover_image} alt={selectedPost.title} class="w-full h-48 object-cover mb-4 rounded-lg" />
-          {/if}
-          <div class="markdown-body prose prose-sm max-w-none">
-            <SvelteMarkdown source={selectedPost.body_markdown} />
-          </div>
+
+        <div class="prose prose-lg max-w-none mb-8">
+          <p class="text-gray-700 leading-relaxed whitespace-pre-line">{aboutMe.description}</p>
         </div>
-      {:else}
-        <div class="p-6 flex items-center justify-center h-full">
-          <p class="text-gray-600 text-center">Select a blog post to view details</p>
-        </div>
-      {/if}
+      </div>
     </div>
   </div>
 </div>
   
 <style>
-  :global(.markdown-body) {
-    box-sizing: border-box;
-    min-width: 200px;
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 45px;
+  :global(.prose) {
+    color: #374151;
   }
   
-  @media (max-width: 767px) {
-    :global(.markdown-body) {
-      padding: 15px;
-    }
+  :global(.prose p) {
+    margin-bottom: 1rem;
   }
 </style>
