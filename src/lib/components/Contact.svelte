@@ -51,28 +51,32 @@
     submitMessageType = '';
     
     try {
-      const formData = {
-        firstName,
-        lastName,
-        email,
-        service: selectedService,
-        budget: selectedBudget,
-        message
-      };
+      // Submit directly to Formspree (works with static deployments)
+      const formspreeEndpoint = 'https://formspree.io/f/mzdpzljy';
+      const subject = `New Contact Form Submission from ${firstName} ${lastName}`;
       
-      // Try using the API route first
-      const response = await fetch('/api/contact', {
+      const response = await fetch(formspreeEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          _subject: subject,
+          _to: 'inmc050817@gmail.com',
+          name: `${firstName} ${lastName}`,
+          email: email,
+          service: selectedService,
+          budget: selectedBudget,
+          message: message,
+          _replyto: email,
+        })
       });
       
       const result = await response.json();
       
-      if (response.ok && result.success) {
-        submitMessage = result.message || 'Thank you for your message! I will get back to you soon.';
+      if (response.ok) {
+        submitMessage = 'Thank you for your message! I will get back to you soon.';
         submitMessageType = 'success';
         
         // Reset form
